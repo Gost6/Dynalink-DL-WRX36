@@ -21,6 +21,7 @@ jobs:
                 cd -
                 mkdir firmware
                 cp openwrt-imagebuilder-ipq807x-generic.Linux-x86_64/bin/targets/ipq807x/generic/* firmware
+                rm  firmware/openwrt-ipq807x-generic-dynalink_dl-wrx36-squashfs-factory.ubi
                 tar -cvf firmware.tar firmware
 
              - name: Upload artifacts
@@ -39,15 +40,21 @@ jobs:
               uses: actions/download-artifact@v3
               with:
                 name: firmware
+
+            - name: extract artifacts
+              run: tar xf firmware.tar
                 
             - name: extract artifacts
               run: tar xf firmware.tar
+
+            - name: Set date env variable
+              run: echo "NOW=$(date +'%Y.%m.%d')" >> $GITHUB_ENV
                                                                                                                 
             - name: Create a release
               uses: "marvinpinto/action-automatic-releases@latest"
               with:
                 repo_token: "${{ secrets.GITHUB_TOKEN }}"
-                prerelease: true
-                title: "Dynalink DL-WRX36 Firmware"
+                prerelease: false
+                title: "Dynalink DL-WRX36 Firmware ${{ env.NOW }}"
                 automatic_release_tag: "v1"
                 files: firmware/*
