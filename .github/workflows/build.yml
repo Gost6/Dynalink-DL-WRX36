@@ -43,9 +43,6 @@ jobs:
 
             - name: extract artifacts
               run: tar xf firmware.tar
-                
-            - name: extract artifacts
-              run: tar xf firmware.tar
 
             - name: Set date env variable
               run: echo "NOW=$(date +'%Y.%m.%d')" >> $GITHUB_ENV
