@@ -1,7 +1,7 @@
 name: Build Dynalink DL-WRX36 23.05 Firmware
 on:
   schedule:
-    - cron: '15 15 * * *'
+    - cron: '35 15 * * *'
 
 jobs:
     build:
@@ -14,7 +14,7 @@ jobs:
                run: |
                 wget https://downloads.openwrt.org/releases/23.05-SNAPSHOT/targets/ipq807x/generic/openwrt-imagebuilder-23.05-SNAPSHOT-ipq807x-generic.Linux-x86_64.tar.xz
                 tar -xf openwrt-imagebuilder-23.05-SNAPSHOT-ipq807x-generic.Linux-x86_64.tar.xz
-                wget https://downloads.openwrt.org/releases/packages-22.03/aarch64_cortex-a53/packages/collectd-mod-cpufreq_5.12.0-34_aarch64_cortex-a53.ipk -P openwrt-imagebuilder-qualcommax-ipq807x.Linux-x86_64/packages/
+                wget https://downloads.openwrt.org/releases/packages-22.03/aarch64_cortex-a53/packages/collectd-mod-cpufreq_5.12.0-34_aarch64_cortex-a53.ipk -P openwrt-imagebuilder-23.05-SNAPSHOT-ipq807x-generic.Linux-x86_64/packages/
                 mkdir -p openwrt-imagebuilder-23.05-SNAPSHOT-ipq807x-generic.Linux-x86_64/files/etc/config
                 cp .github/workflows/dockerd openwrt-imagebuilder-23.05-SNAPSHOT-ipq807x-generic.Linux-x86_64/files/etc/config
                 cd openwrt-imagebuilder-23.05-SNAPSHOT-ipq807x-generic.Linux-x86_64
