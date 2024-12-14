@@ -10,13 +10,12 @@ jobs:
                uses: actions/checkout@v4
              - name: Build kyes
                run: |
-                wget https://downloads.openwrt.org/snapshots/targets/qualcommax/ipq807x/openwrt-imagebuilder-qualcommax-ipq807x.Linux-x86_64.tar.xz
-                tar -xf openwrt-imagebuilder-qualcommax-ipq807x.Linux-x86_64.tar.xz
+                wget https://downloads.openwrt.org/snapshots/targets/qualcommax/ipq807x/openwrt-imagebuilder-qualcommax-ipq807x.Linux-x86_64.tar.zst
+                tar -xf openwrt-imagebuilder-qualcommax-ipq807x.Linux-x86_64.tar.zst
                 cd openwrt-imagebuilder-qualcommax-ipq807x.Linux-x86_64
                 make image PROFILE=dynalink_dl-wrx36
                 mkdir key
-                mv key-build key/
-                mv key-build.pub key/
+                mv *.pem key/
              - name: Release build artifacts
                uses: ncipollo/release-action@v1.14.0
                with:
